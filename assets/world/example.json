@@ -2,6 +2,15 @@
     "characters":[],
     "world":[
         {
+            "meta":{
+                "name": "Cathedral lvl 1",
+                "color": "#888888"
+            },
+            "layerInfo":{
+                "x": 0,
+                "y": 0,
+                "row": 20
+            },
             "tileSet":"cobblestone",
             "tileMap":[
                 "┌","─","─","─","─","─","─","─","─","─","─","┬","─","─","─","─","─","─","┐",   ,
