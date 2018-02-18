@@ -1,0 +1,20 @@
+{
+    "characters":[],
+    "requiredTilesets":["example"],
+    "world":[
+        {
+            "meta":{
+                "name": "Cathedral lvl 1",
+                "color": "#888888"
+            },
+            "layerInfo":{
+                "x": 0,
+                "y": 0,
+                "row": 20,
+                "charactersPerTile": 1
+            },
+            "tileSet":"example",
+            "tileMap":"./example.world"
+        }
+    ]
+}

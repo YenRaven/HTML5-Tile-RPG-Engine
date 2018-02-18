@@ -1,0 +1,21 @@
+{
+    "chunkWidth": 3,
+    "chunkHeight": 2,
+    "rules":[
+        [ null, null, null ],
+        [ null, "impassable", null]
+    ],
+    "tiles":{
+        "tree":[
+            "/assets/images/tree-1.png"
+        ]
+    },
+    "chunk":[
+        ["tree", null, null],
+        [null, null, null]
+    ],
+    "base":{
+        "x": 1,
+        "y": 1
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "chunkWidth": 1,
+    "chunkHeight": 1,
+    "rules":[
+        []
+    ],
+    "tiles":{
+        "mud":[
+            "/assets/images/mud-1.png"
+        ]
+    },
+    "chunk":[
+        ["mud"]
+    ],
+    "root":{
+        "x": 0,
+        "y": 0
+    }
+}

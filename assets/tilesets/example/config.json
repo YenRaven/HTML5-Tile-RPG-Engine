@@ -1,0 +1,25 @@
+{
+    "example": {
+        "tileBaseSize":{
+            "width": 16,
+            "height": 16
+        },
+        "tiles":{
+            "─":"./wall-horz.json",
+            "│":"./wall-vert.json",
+            "┌":"./wall-tower.json",
+            "┐":"./wall-tower.json",
+            "└":"./wall-tower.json",
+            "┘":"./wall-tower.json",
+            "├":"./wall-tower.json",
+            "┤":"./wall-tower.json",
+            "┬":"./wall-tower.json",
+            "┴":"./wall-tower.json",
+            "┼":"./wall-tower.json",
+            "D":"./dirt.json",
+            "T":"./tree.json",
+            "░":"./dirt.json",
+            "▒":"./mud.json"
+        }
+    }
+}

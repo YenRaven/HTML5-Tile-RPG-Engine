@@ -1,0 +1,25 @@
+{
+    "chunkWidth": 1,
+    "chunkHeight": 2,
+    "rules":[
+        [ null ],
+        [ "impassable" ]
+    ],
+    "tiles":{
+        "wall":[
+            "/assets/images/wall-horz-1.png"
+        ],
+        "dirt":[
+            "/assets/images/dirt-1.png",
+            "/assets/images/dirt-2.png"
+        ]
+    },
+    "chunk":[
+        ["wall"],
+        ["dirt"]
+    ],
+    "base":{
+        "x": 0,
+        "y": 1
+    }
+}
