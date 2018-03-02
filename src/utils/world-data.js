@@ -1,8 +1,7 @@
+//@Flow
 
-
-export default class WorldData {
-    constructor(loader: function, worldFile: string){
-        super();
+export default class {
+    constructor(loader: (path: string) => promise, worldFile: string){
         this.ready = false;
         loader(worldFile).then((data) => {
             this.ready = true;

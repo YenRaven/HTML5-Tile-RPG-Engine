@@ -2,7 +2,7 @@
     "characters":[],
     "requiredTilesets":["example"],
     "width": 20,
-    "height": 20,
+    "height": 22,
     "tileWidth": 16,
     "tileHeight": 16,
     "world":[

@@ -15,20 +15,20 @@ export default function(filePath: String){
         worldConf.requiredTilesets.forEach((tileset) => {
             fetch("assets/tileset/"+tileset+".tileset").then((res) => {
                 return res.json();
-            }).then((tilesetConf) => {
+            }).then((tilesetsConf) => {
+                let tilesetConf = tilesetsConf[tileset];
                 worldData.tilesets[tileset] = {
-                    tileBaseSize
-                } = tilesetConf;
+                    tileBaseSize:tilesetConf.tileBaseSize,
+                    tileKey:[],
+                    tile:[]
+                };
                 Object.entries(tilesetConf.tiles).forEach((tileConf, id) => {
                     worldData.tilesets[tileset].tileKey[id] = tileConf[0];
                     const tileObj = {...tileConf[1]};
                     Object.entries(tileObj.tiles).forEach((tile) => {
-                        tileObj.tiles[tile] = tileObj.tiles[tile].map((tilePath)=>{
+                        tileObj.tiles[tile[0]] = tileObj.tiles[tile[0]].map((tilePath)=>{
                             let img = new Image();
-                            img.onload = ()=>{
-                                URL.revokeObjectURL(img.src);
-                            }
-                            img.src = URL.createObjectURL(tilePath);
+                            img.src = tilePath;
                             return img;
                         });
                     });
@@ -44,14 +44,14 @@ export default function(filePath: String){
         worldData.map = new Array(
             worldConf.width * worldConf.height
         );
-        worldData.map.fill(null);
+        worldData.map.fill([]);
 
         worldConf.world.forEach((layer) => {
             //Construct map from world layers, each entry in worldData.map should hold all the information to render that tile from bottom to top.
             layer.tileMap.forEach((tile, id)=>{
                 //Deconstruct id into x, y
                 let y = Math.floor(id / layer.layerInfo.row);
-                let x = (id - y) % layer.layerInfo.row;
+                let x = (id - y * layer.layerInfo.row) % layer.layerInfo.row;
 
                 let v = new Vec2d.ObjectVector(x, y);
 
