@@ -1,18 +1,24 @@
+import Vec2d from 'vector2d';
+
 
 export default function(filePath: String){
     const worldData = {
-        row: null,
         tilesets:{},
-        map:[]
+        map:null,
+        row:null,
+        tileWidth:16,
+        tileHeight:16
     };
-    fetch(filePath).then((res) => {
+    return fetch(filePath).then((res) => {
         return res.json();
     }).then((worldConf) => {
         worldConf.requiredTilesets.forEach((tileset) => {
             fetch("assets/tileset/"+tileset+".tileset").then((res) => {
                 return res.json();
             }).then((tilesetConf) => {
-                worldData.tilesets[tileset] = {};
+                worldData.tilesets[tileset] = {
+                    tileBaseSize
+                } = tilesetConf;
                 Object.entries(tilesetConf.tiles).forEach((tileConf, id) => {
                     worldData.tilesets[tileset].tileKey[id] = tileConf[0];
                     const tileObj = {...tileConf[1]};
@@ -32,17 +38,34 @@ export default function(filePath: String){
             });
         });
 
+        worldData.tileWidth = worldConf.tileWidth;
+        worldData.tileHeight = worldConf.tileHeight;
+        worldData.row = worldConf.width;
+        worldData.map = new Array(
+            worldConf.width * worldConf.height
+        );
+        worldData.map.fill(null);
+
         worldConf.world.forEach((layer) => {
             //Construct map from world layers, each entry in worldData.map should hold all the information to render that tile from bottom to top.
-            //Looks like theres a problem, the world data will need a row size as well, we cannot compute from layers x,y and row size while inside this loop and I don't want to loop twice.
             layer.tileMap.forEach((tile, id)=>{
                 //Deconstruct id into x, y
+                let y = Math.floor(id / layer.layerInfo.row);
+                let x = (id - y) % layer.layerInfo.row;
+
+                let v = new Vec2d.ObjectVector(x, y);
 
                 //Reconstruct x, y into world map coords.
+                let layerV = new Vec2d.ObjectVector(layer.layerInfo.x, layer.layerInfo.y);
+                v.add(layerV);
+
+                worldData.map[v.getY() * worldConf.width + v.getX()].push({
+                    tile,
+                    tileSet: layer.tileSet
+                });
             });
-            //set max world row size.
-            let layerMaxX = layer.layerInfo.x + layer.layerInfo.row;
-            worldData.row = layerMaxX > worldData.row? layerMaxX : WorldData.row;
         });
+
+        return worldData;
     });
 }

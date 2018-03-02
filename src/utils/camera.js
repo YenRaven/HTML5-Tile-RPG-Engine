@@ -1,23 +1,24 @@
+import Vec2d from 'vector2d';
 
 export default class {
     constructor(x: Number, y: Number, width: Number, height: Number){
-        this.pos = {
-            x: x,
-            y: y
-        }
-        this.width = width;
-        this.height = height;
+        this.pos = new Vec2d.ObjectVector(x, y);
+        this.dim = new Vec2d.ObjectVector(width, height);
     }
 
     setPos(x: Number, y: Number){
-        this.pos = {
-            x: x,
-            y: y
-        }
+        return this.pos.setAxes(x, y);
+    }
+
+    getPos(){
+        return this.pos;
     }
 
     setDimensions(width: Number, height: Number){
-        this.width = width;
-        this.height = height;
+        return this.dim.setAxes(width, height);
+    }
+
+    getDimensions(){
+        return this.dim;
     }
 }

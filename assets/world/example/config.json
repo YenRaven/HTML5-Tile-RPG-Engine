@@ -1,6 +1,10 @@
 {
     "characters":[],
     "requiredTilesets":["example"],
+    "width": 20,
+    "height": 20,
+    "tileWidth": 16,
+    "tileHeight": 16,
     "world":[
         {
             "meta":{

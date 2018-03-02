@@ -1,4 +1,7 @@
+import WorldData from './utils/world-data.js';
+import worldToData from './loaders/world-to-data.js';
 
+let worldData = new WorldData(worldToData, "./assets/world/example.world");
 
 const canvas = document.getElementById("main");
 const ctx = canvas.getContext("2d");

@@ -4,7 +4,7 @@ export default class WorldData {
     constructor(loader: function, worldFile: string){
         super();
         this.ready = false;
-        loader("worldFile").then((data) => {
+        loader(worldFile).then((data) => {
             this.ready = true;
             this.data = data;
         });
