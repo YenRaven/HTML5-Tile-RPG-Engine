@@ -4,7 +4,7 @@ import Camera from './utils/camera.js';
 import FlatRenderer from './renderers/flat-renderer.js';
 
 let worldData = new WorldData(worldToData, "./assets/world/example.world");
-let camera = new Camera(300, 300, 400, 300);
+let camera = new Camera(180, 200, 800, 600);
 
 worldData.promise.then((wd) => {
     console.log(wd);

@@ -21,11 +21,10 @@ export default class {
 
         let wd = this.worldData.data;
 
-        let startX = camPos.getX() - camDim.getX() / 2 - wd.tileWidth;
-        let startY = camPos.getY() - camDim.getY() / 2 - wd.tileHeight;
+        let startVec = camPos.clone().mulS(-1).add(camDim.divS(2));
 
-        let tilesX = (camDim.getX() + wd.tileWidth) / wd.tileWidth;
-        let tilesY = (camDim.getY() + wd.tileHeight) / wd.tileHeight;
+        let tilesX = Math.min( (camDim.getX() + wd.tileWidth) / wd.tileWidth, wd.row );
+        let tilesY = Math.min( (camDim.getY() + wd.tileHeight) / wd.tileHeight, Math.ceil(wd.map.length / wd.row) );
 
         for(let y = 0; y < tilesY; y++){
             for(let x = 0; x < tilesX; x++){
@@ -33,10 +32,10 @@ export default class {
                 let mapId = y * wd.row + x;
                 let tileStack = wd.map[mapId];
 
-                let a = startX + ( x * wd.tileWidth );
+                let a = startVec.getX() + ( x * wd.tileWidth );
                 let drawX = a - (a % wd.tileWidth);
 
-                let b = startY + ( y * wd.tileHeight );
+                let b = startVec.getY() + ( y * wd.tileHeight );
                 let drawY = b - (b % wd.tileHeight);
 
                 let drawVec = new Vec2d.ObjectVector(drawX, drawY);
