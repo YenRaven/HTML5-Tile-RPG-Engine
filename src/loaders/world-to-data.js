@@ -12,31 +12,6 @@ export default function(filePath: String){
     return fetch(filePath).then((res) => {
         return res.json();
     }).then((worldConf) => {
-        worldConf.requiredTilesets.forEach((tileset) => {
-            fetch("assets/tileset/"+tileset+".tileset").then((res) => {
-                return res.json();
-            }).then((tilesetsConf) => {
-                let tilesetConf = tilesetsConf[tileset];
-                worldData.tilesets[tileset] = {
-                    tileBaseSize:tilesetConf.tileBaseSize,
-                    tileKey:[],
-                    tile:[]
-                };
-                Object.entries(tilesetConf.tiles).forEach((tileConf, id) => {
-                    worldData.tilesets[tileset].tileKey[id] = tileConf[0];
-                    const tileObj = {...tileConf[1]};
-                    Object.entries(tileObj.tiles).forEach((tile) => {
-                        tileObj.tiles[tile[0]] = tileObj.tiles[tile[0]].map((tilePath)=>{
-                            let img = new Image();
-                            img.src = tilePath;
-                            return img;
-                        });
-                    });
-                    worldData.tilesets[tileset].tile[id] = tileObj;
-
-                });
-            });
-        });
 
         worldData.tileWidth = worldConf.tileWidth;
         worldData.tileHeight = worldConf.tileHeight;
@@ -44,10 +19,12 @@ export default function(filePath: String){
         worldData.map = new Array(
             worldConf.width * worldConf.height
         );
-        worldData.map.fill([]);
+        worldData.map.fill(null);
+        worldData.map = worldData.map.map((i) => { return new Array(); });
 
         worldConf.world.forEach((layer) => {
             //Construct map from world layers, each entry in worldData.map should hold all the information to render that tile from bottom to top.
+            let layerV = new Vec2d.ObjectVector(layer.layerInfo.x, layer.layerInfo.y);
             layer.tileMap.forEach((tile, id)=>{
                 //Deconstruct id into x, y
                 let y = Math.floor(id / layer.layerInfo.row);
@@ -56,7 +33,6 @@ export default function(filePath: String){
                 let v = new Vec2d.ObjectVector(x, y);
 
                 //Reconstruct x, y into world map coords.
-                let layerV = new Vec2d.ObjectVector(layer.layerInfo.x, layer.layerInfo.y);
                 v.add(layerV);
 
                 worldData.map[v.getY() * worldConf.width + v.getX()].push({
@@ -66,6 +42,40 @@ export default function(filePath: String){
             });
         });
 
-        return worldData;
+        return Promise.all(worldConf.requiredTilesets.map((tileset) => {
+            return fetch("assets/tileset/"+tileset+".tileset").then((res) => {
+                return res.json();
+            }).then((tilesetsConf) => {
+                let tilesetConf = tilesetsConf[tileset];
+                worldData.tilesets[tileset] = {
+                    tileBaseSize:tilesetConf.tileBaseSize,
+                    tileKey:[],
+                    tile:[]
+                };
+                let imgPromises = [];
+                Object.entries(tilesetConf.tiles).forEach((tileConf, id) => {
+                    worldData.tilesets[tileset].tileKey[id] = tileConf[0];
+                    const tileObj = {...tileConf[1]};
+                    Object.entries(tileObj.tiles).forEach((tile) => {
+                        tileObj.tiles[tile[0]] = tileObj.tiles[tile[0]].map((tilePath)=>{
+                            let img = new Image();
+                            imgPromises.push(new Promise((res, rej) => {
+                                img.onload = ()=>{
+                                    res();
+                                }
+                            }));
+                            img.src = tilePath;
+                            return img;
+                        });
+                    });
+                    worldData.tilesets[tileset].tile[id] = tileObj;
+
+                });
+
+                return Promise.all(imgPromises);
+            });
+        })).then((loaded) => {
+            return worldData;
+        });
     });
 }

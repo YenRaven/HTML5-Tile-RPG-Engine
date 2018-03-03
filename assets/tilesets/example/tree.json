@@ -8,11 +8,15 @@
     "tiles":{
         "tree":[
             "/assets/images/tree-1.png"
+        ],
+        "dirt":[
+            "/assets/images/dirt-1.png",
+            "/assets/images/dirt-2.png"
         ]
     },
     "chunk":[
         ["tree", null, null],
-        [null, null, null]
+        [null, "dirt", null]
     ],
     "base":{
         "x": 1,

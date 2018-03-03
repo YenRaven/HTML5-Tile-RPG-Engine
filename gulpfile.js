@@ -36,7 +36,10 @@ function compileWorld(data, filePath){
     data.world = data.world.map((layer) => {
         let newLayer = Object.assign({}, layer);
         newLayer.tileMap = [];
-        let tileMapArray = String(fs.readFileSync(path.resolve(filePath, "..", layer.tileMap))).split('');
+        let tileMapArray = String(fs.readFileSync(path.resolve(filePath, "..", layer.tileMap)))
+                            .replace(/\r\n/g, '')
+                            .replace(/\n/g, '')
+                            .split('');
         while(tileMapArray.length > 0){
             let nextTileStr = "";
             for(let i=0; i<layer.layerInfo.charactersPerTile; i++){

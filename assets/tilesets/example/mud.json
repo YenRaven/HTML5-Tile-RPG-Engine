@@ -6,7 +6,8 @@
     ],
     "tiles":{
         "mud":[
-            "/assets/images/mud-1.png"
+            "/assets/images/mud-1.png",
+            "/assets/images/mud-2.png"
         ]
     },
     "chunk":[
