@@ -1,0 +1,20 @@
+{
+    "chunkWidth": 1,
+    "chunkHeight": 1,
+    "rules":[
+        [ null ]
+    ],
+    "tiles":{
+        "grass":[
+            "/assets/images/grass-1.png",
+            "/assets/images/grass-2.png"
+        ]
+    },
+    "chunk":[
+        ["grass"]
+    ],
+    "root":{
+        "x": 0,
+        "y": 1
+    }
+}

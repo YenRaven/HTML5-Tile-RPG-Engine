@@ -19,44 +19,6 @@ function html(){
 }
 
 function assets(){
-    return gulp.src('assets/*')
-        .pipe(gulp.dest('build/assets/'));
-}
-
-function compileTileset(data, filePath){
-    for(var tileset in data){
-        Object.entries(data[tileset].tiles = data[tileset].tiles).forEach( (tile) => {
-            data[tileset].tiles[tile[0]] = JSON.parse(fs.readFileSync(path.resolve(filePath, "..", tile[1])));
-        })
-    }
-    return data;
-}
-
-function compileWorld(data, filePath){
-    data.world = data.world.map((layer) => {
-        let newLayer = Object.assign({}, layer);
-        newLayer.tileMap = [];
-        let tileMapArray = String(fs.readFileSync(path.resolve(filePath, "..", layer.tileMap)))
-                            .replace(/\r\n/g, '')
-                            .replace(/\n/g, '')
-                            .split('');
-        while(tileMapArray.length > 0){
-            let nextTileStr = "";
-            for(let i=0; i<layer.layerInfo.charactersPerTile; i++){
-                nextTileStr += tileMapArray.shift();
-            }
-            newLayer.tileMap.push(nextTileStr);
-        }
-        return newLayer;
-    });
-    return data;
-}
-
-gulp.task('html', function(){
-    return html();
-})
-
-gulp.task('assets', function(done){
     gulp.src('assets/images/*')
         .pipe(gulp.dest('build/assets/images'));
 
@@ -105,7 +67,43 @@ gulp.task('assets', function(done){
             );
         });
     })
+}
 
+function compileTileset(data, filePath){
+    for(var tileset in data){
+        Object.entries(data[tileset].tiles = data[tileset].tiles).forEach( (tile) => {
+            data[tileset].tiles[tile[0]] = JSON.parse(fs.readFileSync(path.resolve(filePath, "..", tile[1])));
+        })
+    }
+    return data;
+}
+
+function compileWorld(data, filePath){
+    data.world = data.world.map((layer) => {
+        let newLayer = Object.assign({}, layer);
+        newLayer.tileMap = [];
+        let tileMapArray = String(fs.readFileSync(path.resolve(filePath, "..", layer.tileMap)))
+                            .replace(/\r\n/g, '')
+                            .replace(/\n/g, '')
+                            .split('');
+        while(tileMapArray.length > 0){
+            let nextTileStr = "";
+            for(let i=0; i<layer.layerInfo.charactersPerTile; i++){
+                nextTileStr += tileMapArray.shift();
+            }
+            newLayer.tileMap.push(nextTileStr);
+        }
+        return newLayer;
+    });
+    return data;
+}
+
+gulp.task('html', function(){
+    return html();
+})
+
+gulp.task('assets', function(done){
+    assets();
     done();
 })
 
@@ -124,6 +122,8 @@ gulp.task('watch', ['build'], function(){
             case ".jpeg":
             case ".png":
             case ".gif":
+            case ".json":
+            case ".world":
                 assets();
             case ".js":
             default:
