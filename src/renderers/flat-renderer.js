@@ -21,7 +21,7 @@ export default class {
 
         let wd = this.worldData.data;
 
-        let startVec = camPos.clone().mulS(-1).add(camDim.divS(2));
+        let startVec = camPos.clone().mulS(-1).add(camDim.clone().divS(2));
 
         let tilesX = Math.min( (camDim.getX() + wd.tileWidth) / wd.tileWidth, wd.row );
         let tilesY = Math.min( (camDim.getY() + wd.tileHeight) / wd.tileHeight, Math.ceil(wd.map.length / wd.row) );

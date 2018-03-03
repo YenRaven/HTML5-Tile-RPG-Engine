@@ -1,8 +1,8 @@
 {
     "characters":[],
     "requiredTilesets":["example"],
-    "width": 20,
-    "height": 22,
+    "width": 50,
+    "height": 50,
     "tileWidth": 16,
     "tileHeight": 16,
     "world":[
@@ -14,7 +14,7 @@
             "layerInfo":{
                 "x": 0,
                 "y": 0,
-                "row": 20,
+                "row": 25,
                 "charactersPerTile": 1
             },
             "tileSet":"example",
