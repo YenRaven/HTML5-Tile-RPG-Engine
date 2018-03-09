@@ -31,7 +31,7 @@ export default class {
             Math.floor(worldCoord.getX()),
             Math.floor(worldCoord.getY())
         );
-        console.log(startTile);
+        
         let endTile = startTile.clone().add(tilesInCamera);
         //Transform world coords for tiles into camera coords
 

@@ -6,8 +6,7 @@
     ],
     "tiles":{
         "water":[
-            "/assets/images/water-1.png",
-            "/assets/images/water-1-f2.png"
+            "/assets/images/water-2.png"
         ]
     },
     "chunk":[
