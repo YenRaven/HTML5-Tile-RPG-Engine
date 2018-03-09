@@ -1,14 +1,21 @@
 import WorldData from './utils/world-data.js';
 import worldToData from './loaders/world-to-data.js';
+import DynamicWorldData from './utils/dynamic-world-data.js';
 import Camera from './utils/camera.js';
 import FlatRenderer from './renderers/flat-renderer.js';
 
-let worldData = new WorldData(worldToData, "./assets/world/example.world");
-let camera = new Camera(180, 200, 800, 600);
+//let worldData = new WorldData(worldToData, "./assets/world/example.world");
+let worldData = new DynamicWorldData("example");
+let camera = new Camera(0, 0, 1024, 768);
 
+let x = 0, y = 0;
 worldData.promise.then((wd) => {
     console.log(wd);
-    renderer.render();
+    setInterval(() => {
+        camera.setPos(x++, y+=2);
+        //console.log(x, y);
+        renderer.render();
+    }, 10)
 })
 
 const canvas = document.getElementById("main");

@@ -5,16 +5,15 @@
         [ null ]
     ],
     "tiles":{
-        "dirt":[
-            "/assets/images/dirt-1.png",
-            "/assets/images/dirt-2.png"
+        "water":[
+            "/assets/images/water-1.png"
         ]
     },
     "chunk":[
-        ["dirt"]
+        ["water"]
     ],
     "root":{
         "x": 0,
-        "y": 0
+        "y": 1
     }
 }

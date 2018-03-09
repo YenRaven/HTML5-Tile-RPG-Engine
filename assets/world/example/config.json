@@ -17,7 +17,7 @@
                 "row": 25,
                 "charactersPerTile": 1
             },
-            "tileSet":"example",
+            "tileset":"example",
             "tileMap":"./example.world"
         }
     ]

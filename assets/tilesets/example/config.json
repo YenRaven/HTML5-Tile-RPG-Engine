@@ -19,7 +19,19 @@
             "D":"./dirt.json",
             "T":"./tree.json",
             "░":"./grass.json",
-            "▒":"./dirt.json"
+            "▒":"./dirt.json",
+            "≈":"./water.json",
+            "≡":"./cliff-edge-top.json",
+            "╕":"./cliff-edge-top-right.json",
+            "╒":"./cliff-edge-top-left.json",
+            "▀":"./water-edge-top.json",
+            "▐":"./water-edge-right.json",
+            "▌":"./water-edge-left.json",
+            "╡":"./water-edge-top-right.json",
+            "╞":"./water-edge-top-left.json",
+            "╘":"./water-edge-bottom-left.json",
+            "╛":"./water-edge-bottom-right.json",
+            "▄":"./water-edge-bottom.json"
         }
     }
 }

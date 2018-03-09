@@ -20,6 +20,8 @@
   "homepage": "https://github.com/YenRaven/HTML5-Tile-RPG-Engine#readme",
   "dependencies": {
     "express": "^4.15.2",
+    "fast-simplex-noise": "^3.2.0",
+    "seedrandom": "^2.4.3",
     "vector2d": "^2.1.0"
   },
   "devDependencies": {

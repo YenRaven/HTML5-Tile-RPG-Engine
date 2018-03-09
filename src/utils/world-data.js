@@ -11,7 +11,21 @@ export default class {
     }
 
     getTileData(x, y){
-        const r = this.data.row;
-        return this.data.map[r * y + x];
+        if(this.data.map[y]){
+            return this.data.map[y][x];
+        }
+        return undefined;
+    }
+
+    getTileWidth(){
+        return this.data.tileWidth;
+    }
+
+    getTileHeight(){
+        return this.data.tileHeight;
+    }
+
+    getTileset(tileset: String){
+        return this.data.tilesets[tileset];
     }
 }

@@ -5,13 +5,13 @@
         [ null ]
     ],
     "tiles":{
-        "dirt":[
-            "/assets/images/dirt-1.png",
-            "/assets/images/dirt-2.png"
+        "edge":[
+            "/assets/images/cliff-edge-top-1.png",
+            "/assets/images/cliff-edge-top-2.png"
         ]
     },
     "chunk":[
-        ["dirt"]
+        ["edge"]
     ],
     "root":{
         "x": 0,
